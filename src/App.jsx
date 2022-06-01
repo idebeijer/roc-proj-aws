@@ -3,6 +3,8 @@ import { SnackbarProvider } from "notistack";
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./views/Home";
 import { theme } from "./theme/index";
+import { Register } from "./views/auth/Register";
+import { AuthProvider } from "./contexts/AuthProvider";
 
 function App() {
   return (
@@ -15,7 +17,7 @@ function App() {
         />
         <Routes>
           <Route path="/">
-            <Route index element={<Home />} />
+            <Route index element={<Register />} />
           </Route>
         </Routes>
       </SnackbarProvider>
