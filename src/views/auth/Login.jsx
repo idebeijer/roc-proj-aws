@@ -8,9 +8,14 @@ import { useFormik } from "formik";
 import { Container } from "@mui/system";
 import { axiosInstance } from "../../services/axios.service";
 import useAuth from "../../hooks/useAuth";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 export const Login = () => {
   const { setAuth } = useAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from.pathname || "/";
 
   const formik = useFormik({
     initialValues: {
@@ -26,10 +31,13 @@ export const Login = () => {
     onSubmit: async (values) => {
       try {
         const response = await axiosInstance.post(
-          "/auth/register",
+          "/auth/login",
           JSON.stringify({ email: values.email, password: values.password })
         );
         console.log(response);
+        const accessToken = response.data.accessToken;
+        const refreshToken = response.data.refreshToken;
+        setAuth({ accessToken, refreshToken });
       } catch (error) {
         if (!err?.response) {
           console.log("Something went wrong");
@@ -37,6 +45,7 @@ export const Login = () => {
           console.log("erro");
         }
       }
+      navigate(from, { replace: true });
     },
   });
 
@@ -74,7 +83,7 @@ export const Login = () => {
                 type="submit"
                 variant="contained"
               >
-                Sign up
+                Sign in
               </Button>
             </Box>
           </form>
