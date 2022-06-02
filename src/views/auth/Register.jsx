@@ -16,7 +16,7 @@ export const Register = () => {
     },
     validationSchema: Yup.object({
       email: Yup.string().email("Invalid email").max(255).required("Required"),
-      password: Yup.string().min(8).max(255).required("Required"),
+      password: Yup.string().min(0).max(255).required("Required"),
       confirmPassword: Yup.string().required("Required"),
     }),
     onSubmit: async (values) => {

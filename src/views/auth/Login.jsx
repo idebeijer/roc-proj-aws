@@ -7,9 +7,10 @@ import { emailIsValid } from "../../utils/auth.helper";
 import { useFormik } from "formik";
 import { Container } from "@mui/system";
 import { axiosInstance } from "../../services/axios.service";
+import useAuth from "../../hooks/useAuth";
 
-export const Register = () => {
-  const { setAuth } = useContext(AuthContext);
+export const Login = () => {
+  const { setAuth } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -19,7 +20,7 @@ export const Register = () => {
     },
     validationSchema: Yup.object({
       email: Yup.string().email("Invalid email").max(255).required("Required"),
-      password: Yup.string().min(8).max(255).required("Required"),
+      password: Yup.string().min(0).max(255).required("Required"),
       confirmPassword: Yup.string().required("Required"),
     }),
     onSubmit: async (values) => {
