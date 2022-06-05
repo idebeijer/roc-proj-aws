@@ -4,21 +4,15 @@ import React from "react";
 export const BackdropLoader = () => {
   return (
     <div>
-      <CircularProgress color="inherit" />
+      <Backdrop
+        sx={{
+          color: "#000000",
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
+        open={true}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 };
-
-{
-  /* <div>
-<Backdrop
-  sx={{
-    color: "#000000",
-    zIndex: (theme) => theme.zIndex.drawer + 1,
-  }}
-  open={true}
->
-  <CircularProgress color="inherit" />
-</Backdrop>
-</div> */
-}

@@ -9,6 +9,7 @@ import { Container } from "@mui/system";
 import { axiosInstance } from "../../services/axios.service";
 import useAuth from "../../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { LoginDiscord } from "@/components/auth/LoginDiscord";
 
 export const Login = () => {
   const { setAuth } = useAuth();
@@ -55,6 +56,7 @@ export const Login = () => {
     <>
       <Container maxWidth="sm" sx={{ mt: 12 }}>
         <Paper sx={{ p: 4 }}>
+          <LoginDiscord />
           <form onSubmit={formik.handleSubmit}>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
               <TextField

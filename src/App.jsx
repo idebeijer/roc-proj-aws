@@ -1,6 +1,6 @@
 import { GlobalStyles, ThemeProvider } from "@mui/material";
 import { SnackbarProvider } from "notistack";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { Home } from "./views/Home";
 import { theme } from "./theme/index";
 import { Register } from "./views/auth/Register";
@@ -22,8 +22,9 @@ function App() {
         />
         <Routes>
           <Route path="/">
-            <Route index element={<Register />} />
+            <Route index element={<Navigate to="/login" />} />
             <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
 
             <Route element={<PersistLogin />}>
               <Route element={<RequireAuth />}>
