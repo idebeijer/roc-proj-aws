@@ -1,5 +1,5 @@
 import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState } from "react";
 import AuthContext from "../../contexts/AuthProvider";
 import * as Yup from "yup";
 import { useEffect } from "react";
@@ -31,18 +31,20 @@ export const Login = () => {
     onSubmit: async (values) => {
       try {
         const response = await axiosInstance.post(
-          "/auth/login",
-          JSON.stringify({ email: values.email, password: values.password })
+          "/auth/login/strict",
+          JSON.stringify({ email: values.email, password: values.password }),
+          {
+            withCredentials: true,
+          }
         );
         console.log(response);
-        const accessToken = response.data.accessToken;
-        const refreshToken = response.data.refreshToken;
-        setAuth({ accessToken, refreshToken });
-      } catch (error) {
+        const accessToken = response?.data?.accessToken;
+        setAuth({ accessToken });
+      } catch (err) {
         if (!err?.response) {
           console.log("Something went wrong");
         } else {
-          console.log("erro");
+          console.log(err);
         }
       }
       navigate(from, { replace: true });

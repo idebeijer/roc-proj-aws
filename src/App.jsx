@@ -8,6 +8,8 @@ import { AuthProvider } from "./contexts/AuthProvider";
 import { Login } from "./views/auth/Login";
 import { Profile } from "./views/profile";
 import { RequireAuth } from "./components/RequireAuth";
+import PersistLogin from "./components/PersistLogin";
+import { Missing } from "./views/Page404";
 
 function App() {
   return (
@@ -23,9 +25,13 @@ function App() {
             <Route index element={<Register />} />
             <Route path="login" element={<Login />} />
 
-            <Route element={<RequireAuth />}>
-              <Route path="profile" element={<Profile />} />
+            <Route element={<PersistLogin />}>
+              <Route element={<RequireAuth />}>
+                <Route path="profile" element={<Profile />} />
+              </Route>
             </Route>
+
+            <Route path="*" element={<Missing />} />
           </Route>
         </Routes>
       </SnackbarProvider>

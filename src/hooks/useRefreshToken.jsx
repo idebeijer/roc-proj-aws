@@ -5,18 +5,15 @@ export const useRefreshToken = () => {
   const { setAuth, auth } = useAuth();
 
   const refresh = async () => {
-    const response = await axiosInstance.post("/auth/refresh", {
+    const response = await axiosInstance.post("/auth/refresh/strict", {
       withCredentials: true,
-      data: {
-        refreshToken: auth.refreshToken,
-      },
     });
     setAuth((prev) => {
       console.log(JSON.stringify(prev));
-      console.log(response.data.refreshToken);
-      return { ...prev, refreshToken: response.data.refreshToken };
+      console.log(response.data.accessToken);
+      return { ...prev, accessToken: response.data.accessToken };
     });
-    return response.data.refreshToken;
+    return response.data.accessToken;
   };
 
   return refresh;

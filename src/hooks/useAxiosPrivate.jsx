@@ -8,15 +8,15 @@ const useAxiosPrivate = () => {
   const { auth } = useAuth();
 
   useEffect(() => {
-    const requestIntercept = axiosPrivate.interceptors.request.use((config) => {
+    const requestIntercept = axiosPrivate.interceptors.request.use(
       (config) => {
         if (!config.headers["Authorization"]) {
           config.headers["Authorization"] = `Bearer ${auth?.accessToken}`;
         }
         return config;
       },
-        (error) => Promise.reject(error);
-    });
+      (error) => Promise.reject(error)
+    );
 
     const responseIntercept = axiosPrivate.interceptors.response.use(
       (response) => response,
