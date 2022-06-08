@@ -56,7 +56,9 @@ export const Login = () => {
     <>
       <Container maxWidth="sm" sx={{ mt: 12 }}>
         <Paper sx={{ p: 4 }}>
-          <LoginDiscord />
+          <Box sx={{ mb: 2 }}>
+            <LoginDiscord />
+          </Box>
           <form onSubmit={formik.handleSubmit}>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
               <TextField
