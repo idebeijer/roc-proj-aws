@@ -32,7 +32,7 @@ export const Login = () => {
     onSubmit: async (values) => {
       try {
         const response = await axiosInstance.post(
-          "/auth/login/strict",
+          "/auth/login",
           JSON.stringify({ email: values.email, password: values.password }),
           {
             withCredentials: true,
