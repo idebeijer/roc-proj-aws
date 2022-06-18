@@ -10,6 +10,8 @@ import { Profile } from "./views/profile";
 import { RequireAuth } from "./components/RequireAuth";
 import PersistLogin from "./components/PersistLogin";
 import { Missing } from "./views/Page404";
+import { DashboardLayout } from "./layouts/dashboard/DashboardLayout";
+import { DashboardMain } from "./views/dashboard/DashboardMain";
 
 function App() {
   return (
@@ -28,6 +30,9 @@ function App() {
 
             <Route element={<PersistLogin />}>
               <Route element={<RequireAuth />}>
+                <Route path="dashboard" element={<DashboardLayout />}>
+                  <Route index element={<DashboardMain />} />
+                </Route>
                 <Route path="profile" element={<Profile />} />
               </Route>
             </Route>

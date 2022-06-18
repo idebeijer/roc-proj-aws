@@ -1,4 +1,16 @@
+import React from "react";
 import { createTheme } from "@mui/material";
+import PropTypes from "prop-types";
+import { Link as RouterLink } from "react-router-dom";
+
+const LinkBehavior = React.forwardRef((props, ref) => {
+  const { href, ...other } = props;
+  return <RouterLink data-testid="custom-link" ref={ref} to={href} {...other} />;
+});
+
+LinkBehavior.propTypes = {
+  href: PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.string]).isRequired,
+};
 
 export const theme = createTheme({
   breakpoints: {
@@ -39,9 +51,20 @@ export const theme = createTheme({
         },
       },
     },
+    MuiLink: {
+      defaultProps: {
+        component: LinkBehavior,
+      },
+      styleOverrides: {
+        root: {
+          textDecoration: "none",
+        },
+      },
+    },
     MuiButtonBase: {
       defaultProps: {
         disableRipple: true,
+        LinkComponent: LinkBehavior,
       },
     },
     MuiCardContent: {
