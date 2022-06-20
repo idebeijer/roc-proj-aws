@@ -16,18 +16,13 @@ const primaryNavItems = [
   {
     href: "profile",
     icon: <FaUserAlt />,
-    text: "Profiel",
-  },
-  {
-    href: "vacancies",
-    icon: <FaHandshake />,
-    text: "Vacatures",
+    text: "Profile",
   },
 ];
 
 const secondaryNavItems = [
   {
-    href: "/dashboard",
+    href: "data",
     icon: <DashboardIcon />,
     text: "Data",
   },
