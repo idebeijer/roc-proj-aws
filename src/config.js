@@ -1,1 +1,1 @@
-export const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT || "http://localhost:7218";
+export const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT || "https://auth.debeijer.io/api";

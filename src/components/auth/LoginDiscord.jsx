@@ -13,7 +13,12 @@ export const LoginDiscord = () => {
         method="POST"
         action={`https://localhost:7218/api/Auth/external-login?provider=Discord&returnUrl=http%3A%2F%2Flocalhost%3A3000%2Fprofile`}
       >
-        <Button variant="contained" sx={{ backgroundColor: "#5865F2" }} fullWidth type="submit">
+        <Button
+          variant="contained"
+          sx={{ backgroundColor: "#5865F2", mb: 1 }}
+          fullWidth
+          type="submit"
+        >
           <Typography>Login with Discord</Typography>
         </Button>
       </form>
@@ -21,7 +26,12 @@ export const LoginDiscord = () => {
         method="POST"
         action={`https://localhost:7218/api/Auth/external-login?provider=Google&returnUrl=http%3A%2F%2Flocalhost%3A3000%2Fprofile`}
       >
-        <Button variant="contained" sx={{ backgroundColor: "#5865F2" }} fullWidth type="submit">
+        <Button
+          variant="contained"
+          sx={{ backgroundColor: "#5865F2", mb: 1 }}
+          fullWidth
+          type="submit"
+        >
           <Typography>Login with Google</Typography>
         </Button>
       </form>
@@ -29,7 +39,12 @@ export const LoginDiscord = () => {
         method="POST"
         action={`https://localhost:7218/api/Auth/external-login?provider=GitHub&returnUrl=http%3A%2F%2Flocalhost%3A3000%2Fprofile`}
       >
-        <Button variant="contained" sx={{ backgroundColor: "#5865F2" }} fullWidth type="submit">
+        <Button
+          variant="contained"
+          sx={{ backgroundColor: "#5865F2", mb: 1 }}
+          fullWidth
+          type="submit"
+        >
           <Typography>Login with Github</Typography>
         </Button>
       </form>

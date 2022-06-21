@@ -21,7 +21,7 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
 import { someTableState, awsInfoState } from "@/store/atoms/aws";
 import { dateMaskState } from "@/store/Settings";
 import { lmkLocationsState } from "@/store/atoms/lamark";
@@ -38,8 +38,9 @@ export const DataPanel = () => {
   const tableNames = useRecoilValue(someTableState);
   const lmkLocations = useRecoilValue(lmkLocationsState);
   const dateMask = useRecoilValue(dateMaskState);
+
   const [selectedTable, setSelectedTable] = useState("");
-  const [locationId, setLocationId] = useState("");
+  const [locationId, setLocationId] = useState("LMK001");
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -49,10 +50,17 @@ export const DataPanel = () => {
 
   const axiosPrivate = useAxiosPrivate();
 
+  const setAwsState = useSetRecoilState(awsInfoState);
+
   useEffect(() => {
     const fetchData = async () => {
-      const test = axiosPrivate.get("/aws/dynamodb");
-      console.log(test);
+      const response = await axiosPrivate.get("/aws/dynamodb");
+      setAwsState({
+        region: response.data.region,
+        endpoint: response.data.endpoint,
+        accessKeyId: response.data.accessKeyId,
+        accessSecretKey: response.data.secretAccessKey,
+      });
     };
 
     fetchData();
@@ -67,7 +75,6 @@ export const DataPanel = () => {
     accessSecretKey: awsInfo.accessSecretKey,
     region: awsInfo.region,
     endpoint: awsInfo.endpoint,
-    tableName: selectedTable,
     locationId: locationId,
     startDate: startDate,
     endDate: endDate,
@@ -87,7 +94,7 @@ export const DataPanel = () => {
                 gap={2}
                 sx={{ p: 2 }}
               >
-                <FormControl sx={{ width: 200 }}>
+                {/* <FormControl sx={{ width: 200 }}>
                   <InputLabel id="table-name-label">Table</InputLabel>
                   <Select
                     labelId="table-name-label"
@@ -102,7 +109,7 @@ export const DataPanel = () => {
                       </MenuItem>
                     ))}
                   </Select>
-                </FormControl>
+                </FormControl> */}
 
                 <FormControl sx={{ width: 200 }}>
                   <InputLabel id="location-id-label">Locatie ID</InputLabel>
@@ -160,7 +167,9 @@ export const DataPanel = () => {
                   size="large"
                   onClick={() =>
                     executeQuery(params).then((res) =>
-                      res ? setRawChartData(res) : enqueueSnackbar(`Error`, { variant: "error" })
+                      res.status
+                        ? setRawChartData(res.results)
+                        : enqueueSnackbar(`${res.message}`, { variant: "error" })
                     )
                   }
                 >

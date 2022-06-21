@@ -23,10 +23,7 @@ const PersistLogin = () => {
     !auth?.accessToken ? veryifyRefreshToken() : setIsLoading(false);
   }, []);
 
-  useEffect(() => {
-    console.log(`isLoading: ${isLoading}`);
-    console.log(`aT: ${JSON.stringify(auth?.accessToken)}`);
-  }, [isLoading]);
+  useEffect(() => {}, [isLoading]);
 
   return <>{isLoading ? <BackdropLoader /> : <Outlet />}</>;
 };

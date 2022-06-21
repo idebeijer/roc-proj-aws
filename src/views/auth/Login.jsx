@@ -38,7 +38,6 @@ export const Login = () => {
             withCredentials: true,
           }
         );
-        console.log(response);
         const accessToken = response?.data?.accessToken;
         setAuth({ accessToken });
       } catch (err) {
@@ -48,7 +47,12 @@ export const Login = () => {
           console.log(err);
         }
       }
-      navigate(from, { replace: true });
+      // if (from === "/") {
+      //   navigate("/dashboard");
+      // } else {
+      //   navigate(from);
+      // }
+      navigate("/dashboard");
     },
   });
 

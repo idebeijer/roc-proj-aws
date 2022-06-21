@@ -13,11 +13,11 @@ const primaryNavItems = [
     icon: <FaChartArea />,
     text: "Dashboard",
   },
-  {
-    href: "profile",
-    icon: <FaUserAlt />,
-    text: "Profile",
-  },
+  // {
+  //   href: "profile",
+  //   icon: <FaUserAlt />,
+  //   text: "Profile",
+  // },
 ];
 
 const secondaryNavItems = [

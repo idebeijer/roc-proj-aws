@@ -19,16 +19,29 @@ export const executeQuery = async (params) => {
   });
 
   const statementOptions = {
-    Statement: `SELECT * FROM "${params.tableName}" WHERE "LocationId" = '${params.locationId}' AND "CreationDate" BETWEEN '${startDate}' AND '${endDate}'`,
+    Statement: `SELECT * FROM "esptest_data" WHERE "LocationId" = '${params.locationId}' AND "CreationDate" BETWEEN '${startDate}' AND '${endDate}'`,
     Limit: 50,
   };
 
   try {
     const results = await dynamoClient.send(new ExecuteStatementCommand(statementOptions));
     if (results.$metadata.httpStatusCode === 200) {
-      return results;
+      if (results.Items.length > 0) {
+        return {
+          status: "success",
+          results: results,
+        };
+      } else {
+        return {
+          status: false,
+          message: "No data found",
+        };
+      }
     } else {
-      return false;
+      return {
+        status: false,
+        message: "Failed connection",
+      };
     }
   } catch (err) {
     console.error(err);

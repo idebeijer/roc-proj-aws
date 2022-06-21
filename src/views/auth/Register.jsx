@@ -25,7 +25,6 @@ export const Register = () => {
           "/auth/register",
           JSON.stringify({ email: values.email, password: values.password })
         );
-        console.log(response);
       } catch (error) {
         if (!err?.response) {
           console.log("Something went wrong");
